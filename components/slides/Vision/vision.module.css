@@ -1,0 +1,138 @@
+.section {
+    position: relative;
+    width: 100%;
+    min-height: 100dvh;
+    padding: 60px 80px;
+    display: flex;
+    align-items: center;
+    background-color: #111111; /* Тот же графит */
+    overflow: hidden;
+    scroll-snap-align: start;
+}
+
+/* Матовый шум */
+.section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03); /* Еще тоньше линия */
+    padding-bottom: 20px;
+}
+
+.pageNumber {
+    color: #444; /* Тусклый серый */
+    font-size: 11px;
+    letter-spacing: 0.3em;
+}
+
+.title {
+    font-size: 20px;
+    color: #666;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.bigText {
+    font-size: clamp(32px, 5vw, 64px);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin-bottom: 80px;
+    max-width: 1000px;
+
+    /* Добавляем тот самый молочный градиент из Hero */
+    color: #e2e2e2;
+    background: linear-gradient(180deg, #e2e2e2 50%, #888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.accentPurple {
+    /* Фиолетовый теперь мягкий и приглушенный */
+    background: linear-gradient(135deg, rgba(185, 51, 255, 0.8), rgba(107, 33, 168, 0.6));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+}
+
+.card {
+    /* Линия слева теперь полупрозрачная и мягкая */
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding-left: 32px;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #e2e2e2;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.card p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #8a8a8e; /* Дымчатый серый */
+    font-weight: 300;
+}
+
+/* Фон и анимация сфер как в первом слайде */
+.bgLayer { position: absolute; inset: 0; z-index: 1; }
+
+.gridBg {
+    position: absolute;
+    inset: 0;
+    /* Делаем сетку максимально незаметной */
+    background-image:
+            linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 90%);
+}
+
+.orb {
+    position: absolute;
+    width: 50vw;
+    height: 50vw;
+    border-radius: 50%;
+    filter: blur(160px); /* Максимально мягкое размытие */
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+/* Разносим сферы по углам, чтобы подсветить контент, а не центр */
+.orbTop {
+    background: #6b21a8;
+    top: -15%;
+    right: -5%;
+}
+
+.orbBottom {
+    background: #0084a3;
+    bottom: -15%;
+    left: -10%;
+}

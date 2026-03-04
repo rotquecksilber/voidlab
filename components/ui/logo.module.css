@@ -1,0 +1,78 @@
+.logoContainer {
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    zIndex: 20;
+    cursor: pointer;
+}
+
+.logo {
+    position: relative;
+    font-weight: 600;
+    font-size: clamp(1rem, 5vw, 2.5rem);
+    letter-spacing: 0.1em;
+    color: #fff;
+    overflow: hidden; /* Чтобы блик не выходил за границы */
+}
+
+.logo_lab {
+    color: var(--accent-blue);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0);
+    animation: glitch-glow 4s infinite ease-in-out;
+}
+
+/* Эффект сканирующей полосы (пролетающий блик) */
+.scanline {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(0, 212, 255, 0.2),
+            transparent
+    );
+    transform: skewX(-20deg);
+    animation: scan 6s infinite;
+}
+
+/* Анимация пульсации неона для LAB */
+@keyframes glitch-glow {
+    0%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    }
+    50% {
+        opacity: 0.8;
+        text-shadow: 0 0 5px rgba(0, 212, 255, 0.2);
+    }
+    52% { /* Легкое мерцание как у старой лампы */
+        opacity: 0.5;
+    }
+    54% {
+        opacity: 1;
+    }
+}
+
+/* Анимация пролетающего блика */
+@keyframes scan {
+    0% {
+        left: -100%;
+    }
+    20% {
+        left: 150%;
+    }
+    100% {
+        left: 150%;
+    }
+}
+
+/* Эффект при наведении */
+.logo:hover .logo_lab {
+    color: #fff;
+    background-color: var(--accent-blue);
+    text-shadow: none;
+    padding: 0 4px;
+}

@@ -1,0 +1,148 @@
+.section {
+    position: relative;
+    width: 100%;
+    min-height: 100dvh;
+    padding: 60px 80px;
+    display: flex;
+    align-items: center;
+    background-color: #111111;
+    scroll-snap-align: start;
+    overflow: hidden;
+}
+
+/* Эффект матовой поверхности */
+.section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.bgLayer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+/* Сфера из презентации (лево-верх) */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    pointer-events: none;
+    opacity: 0.18; /* Оптимально для #111111 */
+    z-index: 2;
+}
+
+.orbTopLeft {
+    width: 600px;
+    height: 600px;
+    /* Глубокий фиолетовый переходящий в неоновый синий */
+    background: radial-gradient(circle, #6b21a8 0%, #00d4ff 100%);
+    top: -200px;
+    left: -200px;
+    animation: pulse 12s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); opacity: 0.15; }
+    to { transform: scale(1.15); opacity: 0.22; }
+}
+
+.gridBg {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background-image:
+            linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at 50% 50%, black 10%, transparent 85%);
+}
+
+.container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.sectionTitle {
+    font-size: clamp(32px, 5vw, 64px);
+    color: #e2e2e2;
+    background: linear-gradient(180deg, #e2e2e2 60%, #777 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+}
+.header {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.pageNumber {
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 0.3em;
+
+}
+
+.techGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    margin-top: 60px;
+}
+
+.techGroup {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+}
+
+.groupLabel {
+    font-size: 10px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding-top: 12px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tag {
+    font-size: 11px;
+    padding: 10px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #8a8a8e;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+}
+
+.tagAccent {
+    border-color: rgba(185, 51, 255, 0.2);
+    color: rgba(185, 51, 255, 0.8);
+}
+
+.tag:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+@media (max-width: 1024px) {
+    .techGroup {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
