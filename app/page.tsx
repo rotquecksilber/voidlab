@@ -5,6 +5,8 @@ import Vision from "@/components/slides/Vision/Vision";
 import Services from "@/components/slides/Services/Services";
 import TechStack from "@/components/slides/TechStack/TechStack";
 import Approach from "@/components/slides/Approach/Approach";
+import Workflow from "@/components/slides/Workflow/Workflow";
+import Contact from "@/components/slides/Contact/Contact";
 
 export default function Home() {
   return (
@@ -15,6 +17,8 @@ export default function Home() {
           <Services/>
           <TechStack/>
           <Approach/>
+          <Workflow/>
+          <Contact/>
       </>
   );
 }

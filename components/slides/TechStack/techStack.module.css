@@ -1,3 +1,4 @@
+/* Базовые стили секции — без изменений */
 .section {
     position: relative;
     width: 100%;
@@ -10,7 +11,6 @@
     overflow: hidden;
 }
 
-/* Эффект матовой поверхности */
 .section::before {
     content: "";
     position: absolute;
@@ -20,48 +20,6 @@
     mix-blend-mode: soft-light;
     pointer-events: none;
     z-index: 5;
-}
-
-.bgLayer {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-}
-
-/* Сфера из презентации (лево-верх) */
-.orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(140px);
-    pointer-events: none;
-    opacity: 0.18; /* Оптимально для #111111 */
-    z-index: 2;
-}
-
-.orbTopLeft {
-    width: 600px;
-    height: 600px;
-    /* Глубокий фиолетовый переходящий в неоновый синий */
-    background: radial-gradient(circle, #6b21a8 0%, #00d4ff 100%);
-    top: -200px;
-    left: -200px;
-    animation: pulse 12s infinite alternate ease-in-out;
-}
-
-@keyframes pulse {
-    from { transform: scale(1); opacity: 0.15; }
-    to { transform: scale(1.15); opacity: 0.22; }
-}
-
-.gridBg {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    background-image:
-            linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(circle at 50% 50%, black 10%, transparent 85%);
 }
 
 .container {
@@ -80,17 +38,6 @@
     -webkit-text-fill-color: transparent;
     text-transform: uppercase;
     letter-spacing: -0.04em;
-}
-.header {
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-}
-.pageNumber {
-    font-size: 11px;
-    color: #444;
-    letter-spacing: 0.3em;
-
 }
 
 .techGrid {
@@ -129,6 +76,7 @@
     transition: all 0.4s ease;
 }
 
+/* Оригинальный акцентный тег */
 .tagAccent {
     border-color: rgba(185, 51, 255, 0.2);
     color: rgba(185, 51, 255, 0.8);
@@ -140,9 +88,127 @@
     background: rgba(255, 255, 255, 0.03);
 }
 
+/* Сферы и сетка */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    pointer-events: none;
+    opacity: 0.18;
+    z-index: 2;
+}
+
+.orbTopLeft {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #6b21a8 0%, #00d4ff 100%);
+    top: -200px;
+    left: -200px;
+    animation: pulse 12s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); opacity: 0.15; }
+    to { transform: scale(1.15); opacity: 0.22; }
+}
+
+.gridBg {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background-image:
+            linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at 50% 50%, black 10%, transparent 85%);
+}
+
+/* --- КРУТОЙ МОБИЛЬНЫЙ АДАПТИВ --- */
+
 @media (max-width: 1024px) {
+    .section {
+        padding: 80px 40px;
+        align-items: flex-start;
+    }
     .techGroup {
         grid-template-columns: 1fr;
         gap: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 60px 20px;
+    }
+
+    .techGrid {
+        gap: 32px;
+        margin-top: 40px;
+    }
+
+    .techGroup {
+        /* Добавляем разделитель и свечение для каждой группы */
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+    }
+
+    /* Раскрашиваем группы по очереди */
+    .techGroup:nth-child(odd) {
+        border-left: 2px solid rgba(185, 51, 255, 0.4);
+        box-shadow: -10px 0 20px -10px rgba(185, 51, 255, 0.1);
+    }
+
+    .techGroup:nth-child(even) {
+        border-left: 2px solid rgba(0, 212, 255, 0.4);
+        box-shadow: -10px 0 20px -10px rgba(0, 212, 255, 0.1);
+    }
+
+    .groupLabel {
+        padding-top: 0;
+        margin-bottom: 12px;
+        color: #eee; /* Делаем текст ярче, так как он теперь заголовок блока */
+        font-size: 9px;
+    }
+
+    .tags {
+        gap: 8px;
+    }
+
+    .tag {
+        font-size: 10px;
+        padding: 8px 16px;
+        /* На мобилках теги делаем проще, чтобы не перегружать экран */
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #ccc;
+    }
+
+    /* Раскрашиваем теги внутри групп соответственно цвету группы */
+    .techGroup:nth-child(odd) .tag {
+        border-color: rgba(185, 51, 255, 0.1);
+    }
+
+    .techGroup:nth-child(even) .tag {
+        border-color: rgba(0, 212, 255, 0.1);
+    }
+
+    .gridBg {
+        /* На мобилках сетка часто мешает, делаем её почти невидимой */
+        opacity: 0.2;
+        background-size: 40px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sectionTitle {
+        font-size: 38px;
+        line-height: 1;
+    }
+
+    .tag {
+        flex-grow: 1; /* Теги растягиваются на всю ширину, если их мало */
+        text-align: center;
     }
 }

@@ -1,25 +1,24 @@
 .slide {
     position: relative;
     width: 100%;
-    height: 100dvh;
+    /* Исправлено: min-height вместо height, чтобы не пропадали блоки */
+    min-height: 100dvh;
     padding: 60px 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Мягкий темный графит вместо #050505 */
     background-color: #0a0a0b;
     overflow: hidden;
     scroll-snap-align: start;
 }
 
-/* Эффект матовой поверхности (ультра-деликатный шум) */
 .slide::before {
     content: "";
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.02; /* Приубавили зернистость с 0.04 до 0.02 */
-    mix-blend-mode: soft-light; /* Soft-light мягче, чем Overlay */
+    opacity: 0.02;
+    mix-blend-mode: soft-light;
     pointer-events: none;
     z-index: 3;
 }
@@ -32,12 +31,12 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    /* Убрали фиксированную высоту 100%, чтобы не ломать поток */
+    flex-grow: 1;
     justify-content: center;
 }
 
 .est {
-    /* Приглушаем яркость фиолетового акцента */
     color: rgba(185, 51, 255, 0.7);
     font-size: 11px;
     letter-spacing: 0.3em;
@@ -45,13 +44,12 @@
 }
 
 .titleXl {
+    /* Твои оригинальные размеры */
     font-size: clamp(60px, 14vw, 180px);
     line-height: 0.8;
     letter-spacing: -0.06em;
     margin-bottom: 40px;
-    /* Мягкий "молочный" цвет вместо #fff */
     color: #e2e2e2;
-    /* Добавляем градиент от светлого к чуть более тусклому серому */
     background: linear-gradient(180deg, #e2e2e2 40%, #888 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -60,17 +58,16 @@
 
 .lead {
     font-size: clamp(16px, 2vw, 20px);
-    /* Приглушенный серый вместо #888 */
     color: #8a8a8e;
     max-width: 550px;
     line-height: 1.6;
-    /* Синяя линия теперь тоже полупрозрачная */
     border-left: 1px solid rgba(0, 212, 255, 0.4);
     padding-left: 24px;
     margin-bottom: 60px;
 }
 
 .footerRow {
+    /* Прижимаем футер к низу через margin-top: auto */
     margin-top: auto;
     display: flex;
     justify-content: space-between;
@@ -88,7 +85,6 @@
     font-family: var(--font-mono);
     font-size: 10px;
     padding: 6px 14px;
-    /* Рамки почти сливаются с фоном */
     border: 1px solid rgba(255, 255, 255, 0.05);
     color: #666;
     text-transform: uppercase;
@@ -96,18 +92,17 @@
 
 .scrollHint {
     font-size: 10px;
-    /* Почти невидимая подсказка, чтобы не отвлекать */
     color: #444;
     letter-spacing: 0.1em;
 }
 
-/* Фон и анимация сфер */
 .bgLayer { position: absolute; inset: 0; z-index: 1; }
 
+/* Сетка (если решишь вернуть, убери display: none) */
 .gridBg {
+    display: none;
     position: absolute;
     inset: 0;
-    /* Сетка теперь еще тоньше и темнее */
     background-image:
             linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
@@ -120,10 +115,21 @@
     width: 45vw;
     height: 45vw;
     border-radius: 50%;
-    filter: blur(140px); /* Увеличили размытие для мягкости */
-    opacity: 0.15; /* Понизили прозрачность с 0.2 */
+    filter: blur(140px);
+    opacity: 0.15;
 }
 
-/* Используем более глубокие и менее "кислотные" цвета для сфер */
 .orbBlue { background: #0084a3; top: -10%; right: -5%; }
 .orbPurple { background: #6b21a8; bottom: -10%; left: -5%; }
+
+
+@media (max-width: 768px) {
+    .slide {
+        padding: 40px 30px;
+    }
+    .footerRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+}

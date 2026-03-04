@@ -1,9 +1,8 @@
 
 import "./globals.css";
 import React from "react";
-import Logo from "@/components/ui/logo";
-import cn from 'classnames';
-import {fontMono, fontSans} from "@/fonts";
+
+import {fontMono} from "@/fonts";
 
 
 export default function RootLayout({
@@ -14,7 +13,7 @@ export default function RootLayout({
   return (
       <html lang="en">
       <body className={fontMono.className}>
-      <Logo/>
+
       {children}
       </body>
       </html>
