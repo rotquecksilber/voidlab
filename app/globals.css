@@ -41,6 +41,17 @@ body {
 
 }
 
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Запрет горизонтального скролла на уровне окна */
+  position: relative;
+}
+
+* {
+  box-sizing: border-box; /* Чтобы padding не раздувал ширину 100% */
+}
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
