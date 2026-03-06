@@ -178,12 +178,12 @@ export default function VoidLabEmail() {
                     <div className={styles.metricRow}>
                         <div className={styles.metricCard}>
                             <div className={styles.metricLabel}>PageSpeed (mobile)</div>
-                            <div className={`${styles.metricValue} ${styles.critical}`}>~38–45</div>
-                            <div className={styles.metricDesc}>// НИЖЕ ПОРОГА</div>
+                            <div className={`${styles.metricValue} ${styles.warning}`}>~57-64</div>
+                            <div className={styles.metricDesc}>// СРЕДНЯЯ</div>
                         </div>
                         <div className={styles.metricCard}>
                             <div className={styles.metricLabel}>LCP (Largest Contentful Paint)</div>
-                            <div className={`${styles.metricValue} ${styles.warning}`}>&gt;3.8s</div>
+                            <div className={`${styles.metricValue} ${styles.critical}`}>&gt;34.2s</div>
                             <div className={styles.metricDesc}>// НОРМА: &lt;2.5s</div>
                         </div>
                         <div className={styles.metricCard}>
